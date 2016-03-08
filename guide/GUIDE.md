@@ -21,7 +21,7 @@ Regardless of which language your bots are written in, you'll need to deploy the
 
 ## Prologue
 
-Let me introduce you to [:tophat: Starbot](https://github.com/mattcreager/starbot), the example we'll be working with today.  It's soon-to-be the easiest way to stay apprised of hip repos on GitHub, from the comfort of your favorite Slack channel.
+Let me introduce you to [:star2: Starbot](https://github.com/mattcreager/starbot), the example we'll be working with today.  It's soon-to-be the easiest way to stay apprised of hip repos on GitHub, from the comfort of your favorite Slack channel.
 
 ### Before you begin
 
@@ -35,7 +35,7 @@ Come build with me. Here's what you'll need:
 
 > This guide bounces between Slack, Heroku and your local development machine — so I've prefixed the sub-titles with the applicable logo where appropriate.
 
-### :slack_icon: Create a custom Slack integration
+### ![Slack](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-slack.png) Create a custom Slack integration
 
 We're going to make a [custom integration bot](https://slack.com/apps/build) designed explicitly for your team, though Slack also supports Slack's [App Directory] like [Heroku's](https://slack.com/apps/A0F7VRF7E-heroku) (and either could be deployed on Heroku). As a bonus, I'll show you how to easily distribute your bot using the Heroku Button, so that you can share your creation with everyone – even grandma.
 
@@ -45,30 +45,30 @@ First, visit [`slack.com/apps/build`](https://slack.com/apps/build) and select "
 
 ![select a custom intergration](images/1-custom-intergration.png)
 
-### :code_icon: Run Starbot locally
+### Run Starbot locally
 
 Starbot is essentially a bare-bones [Express](http://expressjs.com/) app, you can find detailed instructions on running it locally in the projects[`README.md`](https://github.com/mattcreager/starbot/blob/master/README.md).
 
-**Clone the project**
+#### Clone the project
 
 ```shell
 $ git clone https://github.com/mattcreager/starbot.git
 $ cd starbot
 ```
 
-**Install dependencies**
+#### Install dependencies
 
 ```shell
 $ npm install
 ```
 
-**Copy `.env-example` to `.env`**
+#### Copy `.env-example` to `.env`
 
 ```shell
 $ cp .env-example .env
 ```
 
-**Start Starbot**
+#### Start Starbot
 
 ```shell
 $ npm start
@@ -78,11 +78,11 @@ $ npm start
 
 That's it! Visit [localhost:3000](http://localhost:3000) and make sure Starbot is running.
 
-### :heroku_icon: Deploy Starbot to Heroku
+### ![Heroku](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-heroku.png) Deploy Starbot to Heroku
 
 We could push our code to Heroku without ever visiting the command line, but what fun  would that be?
 
-***Create a Heroku app, with the Heroku Toolbelt***
+#### Create a Heroku app, with the Heroku Toolbelt
 
 ```shell
 $ heroku create {optional-app-name}
@@ -91,7 +91,7 @@ Creating app... done, stack is cedar-14
 https://starbot-staging.herokuapp.com/
 ```
 
-***Push our code***
+#### Push our code
 
 ```shell
 $ git push heroku master
@@ -116,7 +116,7 @@ To https://git.heroku.com/starbot-staging.git
 
 Did we just deploy this application in two commands? Yes, yes we did! Heroku installed the dependencies in Starbot's `package.json` file automatically, and gave us a URL so that we can visit our newly-deployed app.
 
-**Open the app in a browser**
+#### Open the app in a browser
 
 ```shell
 $ heroku open
@@ -128,7 +128,7 @@ Now Starbot is running on Heroku, but it doesn't know anything about Slack, and 
 
 While publishing notifications to Slack is the simplest of custom integrations, it's still pretty-darn cool, especially with a sprinkling of [Heroku Add-ons](https://elements.heroku.com/addons). Let's show Starbot how to find [trending GitHub projects](https://github.com/trending) and publish them to a Slack channel every morning. In this case, Starbot is using the [BotKit](http://howdy.ai/botkit/docs/) framework from the folks at [Howdy.ai](http://howdy.ai).
 
-### :slack_icon: Set up an "Incoming WebHook" on Slack
+### ![Slack](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-slack.png) Set up an "Incoming WebHook" on Slack
 
 Slack will provide us with the API endpoint, or webhook; later, we'll `POST` data to this endpoint. Select "Incoming WebHooks" and choose a channel.
 
@@ -143,7 +143,7 @@ Now you're the proud new owner of a Slack "Incoming WebHook"! The configuration 
 
 Found it? 👏 Now let's move right along.
 
-### :heroku_icon: Publish a Notification to Slack from Heroku
+### ![Heroku](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-heroku.png) Publish a Notification to Slack from Heroku
 
 Now that we've deployed our Starbot to Heroku, and added an incoming webhook on Slack it's time to connect the dots. [Heroku Add-ons](https://elements.heroku.com/addons) allow us to quickly extend the functionality of our application, in this case, we're going to use the [Scheduler](https://devcenter.heroku.com/articles/scheduler) add-on to deliver trending GitHub repos to Slack daily.
 
@@ -194,7 +194,7 @@ Which should yield the following result:
 
 [Slash commands](https://api.slack.com/slash-commands) are a personal favorite—enabling you to listen for a custom command,   across channels, and triggering a `POST` or `GET` request to a configurable endpoint. In this case, that endpoint will be the Starbot application we deployed earlier, and responding to `/slash` commands will let our bot do a lot more than post once a day!
 
-### :slack_icon: Creating a `/starbot` slash command
+### ![Slack](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-slack.png) Creating a `/starbot` slash command
 
 Return to the "Build a Custom Integration" page and select "Slash Commands".
 
@@ -212,7 +212,7 @@ Slack has also provided us with a token specific to this command, something like
 
 It wouldn't hurt to choose an appropriate name, icon, a descriptive label and some autocomplete text either—you could make something up, or use the suggestions provided in [Starbot's readme](https://github.com/mattcreager/starbot/blob/master/README.md).
 
-### :heroku_icon: Configuring the `/starbot` command on Heroku
+### ![Heroku](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-heroku.png) Configuring the `/starbot` command on Heroku
 
 We've already deployed Starbot to Heroku, so it's waiting patiently for `POST` requests from Slack, but at the moment Slack's requests are going to receive a `402` (Unauthorized) response. To fix that, we'll need to authenticate the bot with Slack, which is easy. We'll just use the Heroku Toolbelt to set a `HIPHUB_COMMAND_TOKEN` [config  var](https://devcenter.heroku.com/articles/config-vars).
 
@@ -229,7 +229,7 @@ Now Slack and the bot can talk! Take `/starbot` or `/starbot repos` for a spin i
 
 And finally the star of the show, a developers best-friend, the real-time bot. Fortunately, no matter how tricky your bot is to build, configuring and deploying it to Heroku is simple.
 
-### :slack_icon: Connecting a bot to the Slack RTM API
+### ![Slack](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-slack.png) Connecting a bot to the Slack RTM API
 
 Ok, one last trip to the "Build a Custom Integration" page and this time we're going to select "Bots".
 
@@ -243,7 +243,7 @@ And again, we're presented with the opportunity to customize the bot we've just 
 
 Take note of the API token, which is going to look like this: `xoxb-253973540645-lAJG4hL34343f3pk52BE6JO`. Without it, we won't be able to authenticate.
 
-### :heroku_icon: Configuring the bot on Heroku
+### ![Heroku](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-heroku.png) Configuring the bot on Heroku
 
 The Starbot bot won't attempt to connect to Slack's RTM API without a token, so once more, let's use the Heroku Toolbelt to set a `SLACK_TOKEN` config var.
 
