@@ -1,5 +1,7 @@
 # 🌟 Starbot
 
+![Starbot](https://heroku-www-files.s3.amazonaws.com/starbot/starbot-banner.png)
+
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 Starbot is [GitHub's trending open-source](https://github.com/trending/) page, reincarnated as a Slack bot. It is also the sample referenced in the ["Slack on Heroku"]() blog post.
