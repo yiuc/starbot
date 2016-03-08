@@ -86,7 +86,7 @@ We could push our code to Heroku without ever visiting the command line, but wha
 $ heroku create {optional-app-name}
 
 Creating app... done, stack is cedar-14
-https://blooming-scrubland-64464.herokuapp.com/
+https://starbot-staging.herokuapp.com/
 ```
 
 ***Push our code***
@@ -104,10 +104,10 @@ remote: Building source:
 remote:
 remote: -----> Node.js app detected
 ...
-remote:        https://blooming-scrubland-64464.herokuapp.com/ deployed to Heroku
+remote:        https://starbot-staging.herokuapp.com/ deployed to Heroku
 remote:
 remote: Verifying deploy.... done.
-To https://git.heroku.com/blooming-scrubland-64464.git
+To https://git.heroku.com/starbot-staging.git
  * [new branch]      master -> master
 
 ```
@@ -124,7 +124,7 @@ Now Starbot is running on Heroku, but it doesn't know anything about Slack, and 
 
 ## Publish Notifications to Slack
 
-While publishing notifications to Slack is the simplest of custom integrations, it's still pretty-darn cool, especially with a sprinkling of [Heroku Add-ons](https://elements.heroku.com/addons). Let's show Starbot how to find [trending GitHub projects](https://github.com/trending) and publish them to a Slack channel every morning by using the [BotKit](http://howdy.ai/botkit/docs/) framework from the folks at [Howdy.ai](http://howdy.ai).
+While publishing notifications to Slack is the simplest of custom integrations, it's still pretty-darn cool, especially with a sprinkling of [Heroku Add-ons](https://elements.heroku.com/addons). Let's show Starbot how to find [trending GitHub projects](https://github.com/trending) and publish them to a Slack channel every morning. In this case, Starbot is using the [BotKit](http://howdy.ai/botkit/docs/) framework from the folks at [Howdy.ai](http://howdy.ai).
 
 ### :slack_icon: Set up an "Incoming WebHook" on Slack
 
@@ -141,26 +141,50 @@ Now you're the proud new owner of a Slack "Incoming WebHook"! The configuration 
 
 Found it? 👏 Now let's move right along.
 
-### :code_icon: Fetch trending open-source projects from GitHub
+### :heroku_icon: Publish a Notification to Slack from Heroku
 
+Now that we've deployed our Starbot to Heroku, and added an incoming webhook on Slack it's time to connect the dots. [Heroku Add-ons](https://elements.heroku.com/addons) allow us to quickly extend the functionality of our application, in this case, we're going to use the [Scheduler](https://devcenter.heroku.com/articles/scheduler) add-on to deliver trending GitHub repos to Slack daily.
 
-```js
- // paste in web_hook.js
+We can provision the add-on from the dashboard, or from the CLI with the Heroku Toolbelt.
+
+```
+$ heroku addons:create scheduler
+
+  Creating scheduler-transparent-24143... done, (free)
+  Adding scheduler-transparent-24143 to starbot-staging... done
+
+$ heroku addons:open scheduler
 ```
 
-### :heroku_icon:
+Then add a scheduled task, and configure it to run daily.
 
-We've already deployed the project to Heroku, but we could extend the app with.. insert Heroku Addons bit.
+![create a scheduled task](images/4-scheduler.png)
 
-https://devcenter.heroku.com/articles/scheduler
+Our new scheduled task will create a [one-off dyno](https://devcenter.heroku.com/articles/one-off-dynos) and execute `npm run notify`, which is defined in this bit of our `package.json`.
 
-`$ heroku addons:create heroku-scheduler`
+```json
+{
+  "name": "starbot",
+  ...
+  "scripts": {
+    "start": "node ./src",
+    "notify": "node ./src/tasks/notify",
+    "test": "standard"
+  },
+  ...
+  "engines": {
+    "node": "5.7.1"
+  }
+}
+```
 
-Finally, create a cronjob to trigger our script once a day.
+We _could_ wait patiently for the task we scheduled to fire—or we could just run our own one-off dyno, and trigger the notification ourselves. Immediate gratification, FTW.
 
-{{ INSERT SCREENSHOT 4 HERE -- configure cronjob }}
+```shell
+$ heroku run "npm run notify"
+```
 
-When your cronjob fires, you should be rewarded with hip repos.
+Which should yield the following result:
 
 ![trending repos](images/5-trending-repos.gif)
 
@@ -193,7 +217,7 @@ We've already deployed Starbot to Heroku, so it's waiting patiently for `POST` r
 ```shell
 $ heroku config:set HIPHUB_COMMAND_TOKEN=JzRR6hEuh3f749iXY3qEpVgN
 
-  Setting config vars and restarting blooming-scrubland-64464... done
+  Setting config vars and restarting starbot-staging... done
   HIPHUB_COMMAND_TOKEN: JzRR6hEuh3f749iXY3qEpVgN
 ```
 
@@ -224,7 +248,7 @@ The Starbot bot won't attempt to connect to Slack's RTM API without a token, so 
 ```shell
 $ heroku config:set SLACK_TOKEN=xoxb-253973540645-lAJG4hL34343f3pk52BE6JO
 
-  Setting config vars and restarting blooming-scrubland-64464... done
+  Setting config vars and restarting starbot-staging... done
   SLACK_TOKEN: xoxb-253973540645-lAJG4hL34343f3pk52BE6JO
 ```
 
