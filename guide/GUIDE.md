@@ -214,13 +214,13 @@ It wouldn't hurt to choose an appropriate name, icon, a descriptive label and so
 
 ### :heroku_icon: Configuring the `/starbot` command on Heroku
 
-We've already deployed Starbot to Heroku, so it's waiting patiently for `POST` requests from Slack, but at the moment Slack's requests are going to receive a `402` (Unauthorized) response. To fix that, we'll need to authenticate the bot with Slack, which is easy. We'll just use the Heroku Toolbelt to set a `HIPHUB_COMMAND_TOKEN` [config  var](https://devcenter.heroku.com/articles/config-vars).
+We've already deployed Starbot to Heroku, so it's waiting patiently for `POST` requests from Slack, but at the moment Slack's requests are going to receive a `402` (Unauthorized) response. To fix that, we'll need to authenticate the bot with Slack, which is easy. We'll just use the Heroku Toolbelt to set a `STARBOT_COMMAND_TOKEN` [config  var](https://devcenter.heroku.com/articles/config-vars).
 
 ```shell
-$ heroku config:set HIPHUB_COMMAND_TOKEN=JzRR6hEuh3f749iXY3qEpVgN
+$ heroku config:set STARBOT_COMMAND_TOKEN=JzRR6hEuh3f749iXY3qEpVgN
 
   Setting config vars and restarting starbot-staging... done
-  HIPHUB_COMMAND_TOKEN: JzRR6hEuh3f749iXY3qEpVgN
+  STARBOT_COMMAND_TOKEN: JzRR6hEuh3f749iXY3qEpVgN
 ```
 
 Now Slack and the bot can talk! Take `/starbot` or `/starbot repos` for a spin in your Slack channel!
