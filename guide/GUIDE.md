@@ -21,7 +21,7 @@ Regardless of which language your bots are written in, you'll need to deploy the
 
 ## Prologue
 
-Let me introduce you to [:tophat: HipHub](https://github.com/mattcreager/hiphub) the example we'll be working with today and the soon-to-be easiest way to stay apprised of hip repos on GitHub, from the comfort of your favorite Slack channel.
+Let me introduce you to [:tophat: Starbot](https://github.com/mattcreager/starbot) the example we'll be working with today and the soon-to-be easiest way to stay apprised of hip repos on GitHub, from the comfort of your favorite Slack channel.
 
 ### Before you begin
 
@@ -43,15 +43,15 @@ First, visit [`slack.com/apps/build`](https://slack.com/apps/build) and select "
 
 ![select a custom intergration](images/1-custom-intergration.png)
 
-### :code_icon: Run HipHub locally
+### :code_icon: Run Starbot locally
 
-HipHub is essentially a bare-bones [Express](http://expressjs.com/) app, you can find detailed instructions on running it locally in the projects[`README.md`](https://github.com/mattcreager/hiphub/blob/master/README.md).
+Starbot is essentially a bare-bones [Express](http://expressjs.com/) app, you can find detailed instructions on running it locally in the projects[`README.md`](https://github.com/mattcreager/starbot/blob/master/README.md).
 
 **Clone the project**
 
 ```shell
-$ git clone https://github.com/mattcreager/hiphub.git
-$ cd hiphub
+$ git clone https://github.com/mattcreager/starbot.git
+$ cd starbot
 ```
 
 **Install dependencies**
@@ -66,17 +66,17 @@ $ npm install
 $ cp .env-example .env
 ```
 
-**Start HipHub**
+**Start Starbot**
 
 ```shell
 $ npm start
 
-🚀 HipHub LIVES on PORT 3000 🚀
+🚀 Starbot LIVES on PORT 3000 🚀
 ```
 
-That's it! Visit [localhost:3000](http://localhost:3000) and make sure HipHub is running.
+That's it! Visit [localhost:3000](http://localhost:3000) and make sure Starbot is running.
 
-### :heroku_icon: Deploy HipHub to Heroku
+### :heroku_icon: Deploy Starbot to Heroku
 
 We could push our code to Heroku without ever visiting the command line, but what fun  would that be?
 
@@ -112,7 +112,7 @@ To https://git.heroku.com/blooming-scrubland-64464.git
 
 ```
 
-Did we just deploy this application in two commands? Yes, yes we did! Heroku installed the dependencies in HipHub's `package.json` file automatically, and gave us a URL so that we can visit our newly-deployed app.
+Did we just deploy this application in two commands? Yes, yes we did! Heroku installed the dependencies in Starbot's `package.json` file automatically, and gave us a URL so that we can visit our newly-deployed app.
 
 **Open the app in a browser**
 
@@ -120,11 +120,11 @@ Did we just deploy this application in two commands? Yes, yes we did! Heroku ins
 $ heroku open
 ```
 
-Now HipHub is running on Heroku, but it doesn't know anything about Slack, and Slack doesn't know anything about it. I expect they'll soon be fast friends, so let's make introductions.
+Now Starbot is running on Heroku, but it doesn't know anything about Slack, and Slack doesn't know anything about it. I expect they'll soon be fast friends, so let's make introductions.
 
 ## Publish Notifications to Slack
 
-While publishing notifications to Slack is the simplest of custom integrations, it's still pretty-darn cool, especially with a sprinkling of [Heroku Add-ons](https://elements.heroku.com/addons). Let's show HipHub how to find [trending GitHub projects](https://github.com/trending) and publish them to a Slack channel every morning by using the [BotKit](http://howdy.ai/botkit/docs/) framework from the folks at [Howdy.ai](http://howdy.ai).
+While publishing notifications to Slack is the simplest of custom integrations, it's still pretty-darn cool, especially with a sprinkling of [Heroku Add-ons](https://elements.heroku.com/addons). Let's show Starbot how to find [trending GitHub projects](https://github.com/trending) and publish them to a Slack channel every morning by using the [BotKit](http://howdy.ai/botkit/docs/) framework from the folks at [Howdy.ai](http://howdy.ai).
 
 ### :slack_icon: Set up an "Incoming WebHook" on Slack
 
@@ -164,9 +164,9 @@ When your cronjob fires, you should be rewarded with hip repos.
 
 ## Receive and Respond to `/slash` Commands
 
-[Slash commands](https://api.slack.com/slash-commands) are a personal favorite—enabling you to listen for a custom command,   across channels, and triggering a `POST` or `GET` request to a configurable endpoint. In this case, that endpoint will be the HipHub application we deployed earlier, and responding to `/slash` commands will let our bot do a lot more than post once a day!
+[Slash commands](https://api.slack.com/slash-commands) are a personal favorite—enabling you to listen for a custom command,   across channels, and triggering a `POST` or `GET` request to a configurable endpoint. In this case, that endpoint will be the Starbot application we deployed earlier, and responding to `/slash` commands will let our bot do a lot more than post once a day!
 
-### :slack_icon: Creating a `/hiphub` slash command
+### :slack_icon: Creating a `/starbot` slash command
 
 Return to the "Build a Custom Integration" page and select "Slash Commands".
 
@@ -176,17 +176,17 @@ Next, pick a name, it must begin with `/`.
 
 ![choose a command](images/7-choose-a-command.png)
 
-Now that we've created the command, we need to configure it. HipHub is expecting a `POST` request to arrive at `/commands/hiphub`.
+Now that we've created the command, we need to configure it. Starbot is expecting a `POST` request to arrive at `/commands/starbot`.
 
 ![set command url](images/8-set-command-url.png)
 
-Slack has also provided us with a token specific to this command, something like: `JzRR6hEuh3f749iXY3qEpVgN`. We're going to use this to verify the payload HipHub receives is coming from Slack.
+Slack has also provided us with a token specific to this command, something like: `JzRR6hEuh3f749iXY3qEpVgN`. We're going to use this to verify the payload Starbot receives is coming from Slack.
 
-It wouldn't hurt to choose an appropriate name, icon, a descriptive label and some autocomplete text either—you could make something up, or use the suggestions provided in [HipHub's readme](https://github.com/mattcreager/hiphub/blob/master/README.md).
+It wouldn't hurt to choose an appropriate name, icon, a descriptive label and some autocomplete text either—you could make something up, or use the suggestions provided in [Starbot's readme](https://github.com/mattcreager/starbot/blob/master/README.md).
 
-### :heroku_icon: Configuring the `/hiphub` command on Heroku
+### :heroku_icon: Configuring the `/starbot` command on Heroku
 
-We've already deployed HipHub to Heroku, so it's waiting patiently for `POST` requests from Slack, but at the moment Slack's requests are going to receive a `402` (Unauthorized) response. To fix that, we'll need to authenticate the bot with Slack, which is easy. We'll just use the Heroku Toolbelt to set a `HIPHUB_COMMAND_TOKEN` [config  var](https://devcenter.heroku.com/articles/config-vars).
+We've already deployed Starbot to Heroku, so it's waiting patiently for `POST` requests from Slack, but at the moment Slack's requests are going to receive a `402` (Unauthorized) response. To fix that, we'll need to authenticate the bot with Slack, which is easy. We'll just use the Heroku Toolbelt to set a `HIPHUB_COMMAND_TOKEN` [config  var](https://devcenter.heroku.com/articles/config-vars).
 
 ```shell
 $ heroku config:set HIPHUB_COMMAND_TOKEN=JzRR6hEuh3f749iXY3qEpVgN
@@ -195,7 +195,7 @@ $ heroku config:set HIPHUB_COMMAND_TOKEN=JzRR6hEuh3f749iXY3qEpVgN
   HIPHUB_COMMAND_TOKEN: JzRR6hEuh3f749iXY3qEpVgN
 ```
 
-Now Slack and the bot can talk! Take `/hiphub` or `/hiphub repos` for a spin in your Slack channel!
+Now Slack and the bot can talk! Take `/starbot` or `/starbot repos` for a spin in your Slack channel!
 
 ## Connecting a Bot to the Slack RTM API
 
@@ -217,7 +217,7 @@ Take note of the API token, which is going to look like this: `xoxb-253973540645
 
 ### :heroku_icon: Configuring the bot on Heroku
 
-The HipHub bot won't attempt to connect to Slack's RTM API without a token, so once more, let's use the Heroku Toolbelt to set a `SLACK_TOKEN` config var.
+The Starbot bot won't attempt to connect to Slack's RTM API without a token, so once more, let's use the Heroku Toolbelt to set a `SLACK_TOKEN` config var.
 
 ```shell
 $ heroku config:set SLACK_TOKEN=xoxb-253973540645-lAJG4hL34343f3pk52BE6JO
@@ -226,7 +226,7 @@ $ heroku config:set SLACK_TOKEN=xoxb-253973540645-lAJG4hL34343f3pk52BE6JO
   SLACK_TOKEN: xoxb-253973540645-lAJG4hL34343f3pk52BE6JO
 ```
 
-That's it! Head over to your Slack channel and use the `/invite `command to invite our `@hiphub` bot to the channel. Then say hello to him - or her!
+That's it! Head over to your Slack channel and use the `/invite `command to invite our `@starbot` bot to the channel. Then say hello to him - or her!
 
 ## Share Your Bot with the Heroku Button
 
