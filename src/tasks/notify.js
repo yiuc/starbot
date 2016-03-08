@@ -31,5 +31,9 @@ trending('javascript', (err, repos) => {
 
   let msg = _.defaults({ attachments: attachments }, msgDefaults)
 
-  bot.sendWebhook(msg, console.log)
+  bot.sendWebhook(msg, (err, res) => {
+    if (err) throw err
+
+    console.log(`\n🚀  Starbot report delivered 🚀`)
+  })
 })
