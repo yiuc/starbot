@@ -4,6 +4,8 @@ _Traditionally, we forego the excessive use of emojis on the Heroku blog. But to
 
 Slack bots come in many shapes and sizes, they publish notifications, respond to `/slash` commands and some, the very best, can even carry a conversation. Bots are becoming an integral part of the way we and developers generally work and get information from the comfort of our slack rooms. In this post we'll create a bot to respond to `/slash` commands for showing us trending repos in GitHub, but a bot could be literally anything that's useful to you and your team as part of your day-to-day.
 
+For a firsthand look at what bots can do, check out the [Heroku's Button Gallery](https://elements.heroku.com/buttons), where users have created all types of bots: from fun bots like [poker](https://elements.heroku.com/buttons/charliehess/slack-poker-bot) and [Jeopardy!](https://elements.heroku.com/buttons/gesteves/trebekbot), to more practical ones like a bot that [tracks the satisfaction of your team members](https://elements.heroku.com/buttons/wearehanno/oskar) or one that [reminds your team to review existing pull requests.](https://elements.heroku.com/buttons/pedrorijo91/slack-pr-bot)
+
 A Slack bot can be built in practically any language, but we're going to build ours with Node, and not just because I ❤ Node—Smart bots (the chatty sort) depend on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets & Node go together like Netflix & Chill.
 
 Regardless of which language your bots are written in, Heroku is going to help you build bigger, smarter bots faster, because bots are apps too.
@@ -242,3 +244,5 @@ Adding a button to your bot is as simple as creating an `app.json`, and adding t
 ### Adding the Heroku Button to the repo
 
 ## Epilogue
+
+Now that you’ve got the basics down, a whole new world of functionality is at your team’s fingertips. Not just your team’s either, with a little more work you can offer your bot as a service for others on Slack through the [App Directory.](https://slack.com/apps) Peruse the directory to see the many ways teams are extending Slack, whether it's with the outside world through Customer Support apps, or internally with HR or Office Management. To learn more about offering your app, check out their [getting started guide.](https://api.slack.com/slack-apps)
