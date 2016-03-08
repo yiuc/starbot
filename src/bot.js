@@ -16,7 +16,7 @@ bot.message((msg) => {
   if (!_.includes(msg.text.match(/<@([A-Z0-9])+>/igm), `<@${this.self.id}>`)) return
 
   slack.chat.postMessage({
-    token: config('SLACK_TEAM_TOKEN'),
+    token: config('SLACK_TOKEN'),
     channel: msg.channel,
     text: 'dfdfd'
   }, (err, data) => {
