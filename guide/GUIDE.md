@@ -136,7 +136,7 @@ _Again, the above selection can be found at {your-team}.slack.com/apps/build/cus
 
 ![select a channel](images/3-select-channel.png)
 
-Now you're the proud new owner of a Slack "Incoming WebHook"! The configuration page includes a lot of great information about formatting and delivering messages to your new webhook, but what we need first is the "Webhook URL". It should look something like this: 
+Now you're the proud new owner of a Slack "Incoming WebHook"! The configuration page includes a lot of great information about formatting and delivering messages to your new webhook, but what we need first is the "Webhook URL". It should look something like this:
 `https://hooks.slack.com/services/T0..LN/B0..VV1/br..dd`
 
 Found it? 👏 Now let's move right along.
@@ -152,7 +152,9 @@ Found it? 👏 Now let's move right along.
 
 We've already deployed the project to Heroku, but we could extend the app with.. insert Heroku Addons bit.
 
-`$ heroku addons:create heroku-cronjob`
+https://devcenter.heroku.com/articles/scheduler
+
+`$ heroku addons:create heroku-scheduler`
 
 Finally, create a cronjob to trigger our script once a day.
 
@@ -236,11 +238,38 @@ Adding a button to your bot is as simple as creating an `app.json` file, and add
 
 ### Creating an `app.json`
 
+The `app.json` file is a manifest format for describing web apps. Here's the interesting bits from Starbot's `app.json`:
+
 ```json
- // paste app.json
+{
+  "name": "🌟 Starbot",
+  "description": "tarbot is GitHub's trending open-source page, reincarnated as a Slack bot",
+  "repository": "https://github.com/mattcreager/starbot",
+  "env": {
+    "STARBOT_COMMAND_TOKEN": {
+      "description": "Slash command token, for the starbot command endpoint",
+      "required": true
+    },
+    "SLACK_TOKEN": {
+      "description": "Slack bot RTM API token",
+      "required": false
+    },
+  },
+  "image": "heroku/nodejs"
+}
 ```
 
+As you can see above, we begin by specifying our apps name, description and repo. We then declare the environment variables Starbot requires to run. Learn more about the [app.json schema on the DevCenter](https://devcenter.heroku.com/articles/app-json-schema).
+
 ### Adding the Heroku Button to the repo
+
+The last thing we must do before people can begin deploying Starbot with the Heroku Button, is to add it to the projects `README.md`:
+
+```
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+```
+
+Heroku will automatically infer the repository URL from the referer header when someone clicks on the button.
 
 ## Epilogue
 
