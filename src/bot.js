@@ -17,8 +17,10 @@ bot.message((msg) => {
 
   slack.chat.postMessage({
     token: config('SLACK_TOKEN'),
+    icon_emoji: config('ICON_EMOJI'),
     channel: msg.channel,
-    text: 'dfdfd'
+    username: 'Starbot',
+    text: `beep boop: I hear you loud and clear!"`
   }, (err, data) => {
     if (err) throw err
 
