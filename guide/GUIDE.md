@@ -244,3 +244,5 @@ Adding a button to your bot is as simple as creating an `app.json`, and adding t
 ### Adding the Heroku Button to the repo
 
 ## Epilogue
+
+Now that you’ve got the basics down, a whole new world of functionality is at your team’s fingertips. Not just your team’s either, with a little more work you can offer your bot as a service for others on Slack through the [App Directory.](https://slack.com/apps) Peruse the directory to see the many ways teams are extending Slack, whether it's with the outside world through Customer Support apps, or internally with HR or Office Management. To learn more about offering your app, check out their [getting started guide.](https://api.slack.com/slack-apps)
