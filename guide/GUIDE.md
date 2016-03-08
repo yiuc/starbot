@@ -1,3 +1,5 @@
+![Starbot](https://heroku-www-files.s3.amazonaws.com/starbot/starbot-banner.png)
+
 # How to Deploy Your Slack Bots to Heroku
 
 _Traditionally, we forego excessive use of emojis on the Heroku blog. But today, we must make an exception, as we’re going to build and deploy a Slack bot to Heroku_ 🤖
@@ -43,7 +45,7 @@ We're going to make a [custom integration bot](https://slack.com/apps/build) des
 
 First, visit [`slack.com/apps/build`](https://slack.com/apps/build) and select "Make a Custom Integration" as seen below.
 
-![select a custom intergration](images/1-custom-intergration.png)
+![select a custom intergration](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/1-custom-intergration.png)
 
 ### Run Starbot locally
 
@@ -132,11 +134,11 @@ While publishing notifications to Slack is the simplest of custom integrations, 
 
 Slack will provide us with the API endpoint, or webhook; later, we'll `POST` data to this endpoint. Select "Incoming WebHooks" and choose a channel.
 
-![select inbound webhook](images/2-select-inbound-webhook.png)
+![select inbound webhook](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/2-select-inbound-webhook.png)
 
 _Again, the above selection can be found at {your-team}.slack.com/apps/build/custom-intergration_
 
-![select a channel](images/3-select-channel.png)
+![select a channel](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/3-select-channel.png)
 
 Now you're the proud new owner of a Slack "Incoming WebHook"! The configuration page includes a lot of great information about formatting and delivering messages to your new webhook, but what we need first is the "Webhook URL". It should look something like this:
 `https://hooks.slack.com/services/T0..LN/B0..VV1/br..dd`
@@ -160,7 +162,7 @@ $ heroku addons:open scheduler
 
 Then add a scheduled task, and configure it to run daily.
 
-![create a scheduled task](images/4-scheduler.png)
+![create a scheduled task](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/4-scheduler.png)
 
 Our new scheduled task will create a [one-off dyno](https://devcenter.heroku.com/articles/one-off-dynos) and execute `npm run notify`, which is defined in this bit of our `package.json`.
 
@@ -188,7 +190,7 @@ $ heroku run "npm run notify"
 
 Which should yield the following result:
 
-![trending repos](images/5-trending-repos.gif)
+![trending repos](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/5-trending-repos.gif)
 
 ## Receive and Respond to `/slash` Commands
 
@@ -198,15 +200,15 @@ Which should yield the following result:
 
 Return to the "Build a Custom Integration" page and select "Slash Commands".
 
-![select slash commands](images/6-select-slash-intergration.png)
+![select slash commands](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/6-select-slash-intergration.png)
 
 Next, pick a name, it must begin with `/`.
 
-![choose a command](images/7-choose-a-command.png)
+![choose a command](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/7-choose-a-command.png)
 
 Now that we've created the command, we need to configure it. Starbot is expecting a `POST` request to arrive at `/commands/starbot`.
 
-![set command url](images/8-set-command-url.png)
+![set command url](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/8-set-command-url.png)
 
 Slack has also provided us with a token specific to this command, something like: `JzRR6hEuh3f749iXY3qEpVgN`. We're going to use this to verify the payload Starbot receives is coming from Slack.
 
@@ -233,11 +235,11 @@ And finally the star of the show, a developers best-friend, the real-time bot. F
 
 Ok, one last trip to the "Build a Custom Integration" page and this time we're going to select "Bots".
 
-![select bots](images/9-select-bot-intergration.png)
+![select bots](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/9-select-bot-intergration.png)
 
 We get to give our bot a name!
 
-![set bot username](images/9-set-bot-username.png)
+![set bot username](https://heroku-www-files.s3.amazonaws.com/starbot/screenshots/9-set-bot-username.png)
 
 And again, we're presented with the opportunity to customize the bot we've just created by giving it a name, description, icon, etc. You'll notice that the bot isn't currently following any channels. Bots are like vampires: they must be invited to a channel before they can follow it (any takers for BuffyBot?).
 
