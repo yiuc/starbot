@@ -2,11 +2,11 @@
 
 # How to Deploy Your Slack Bots to Heroku
 
-Whether they're publishing notifications, responding to /slash commands and or carrying a conversation, bots have become an integral part of the way we work with Slack.  A bot could do literally anything that's useful to you and your team as part of your day-to-day work, as well as most anything else you can imagine. For some first-hand expereince, check out the [Heroku Button Gallery](https://elements.heroku.com/buttons), where users have created all types of bots: from fun bots like [poker](https://elements.heroku.com/buttons/charliehess/slack-poker-bot) and [Jeopardy!](https://elements.heroku.com/buttons/gesteves/trebekbot), to more practical ones like a bot that [tracks the satisfaction of your team members](https://elements.heroku.com/buttons/wearehanno/oskar) or one that [reminds your team to review existing pull requests](https://elements.heroku.com/buttons/pedrorijo91/slack-pr-bot).
+Whether they're publishing notifications, responding to /slash commands and or carrying a conversation, bots have become an integral part of the way we work with Slack.  A bot can do any number of things for your team as part of your day-to-day work, you're only limited by your imagination. For some first-hand expereince, check out the [Heroku Button Gallery](https://elements.heroku.com/buttons), where users have created all types of bots: from fun bots like [poker](https://elements.heroku.com/buttons/charliehess/slack-poker-bot) and [Jeopardy!](https://elements.heroku.com/buttons/gesteves/trebekbot), to more practical ones like a bot that [tracks the satisfaction of your team members](https://elements.heroku.com/buttons/wearehanno/oskar) or one that [reminds your team to review existing pull requests](https://elements.heroku.com/buttons/pedrorijo91/slack-pr-bot).
 
-That said, the real power and fun of Slack bots comes once you know how to build your own.  In this post, we'll show you how to create and deploy a Slack bot that will respond to /slash commands in order to show the top trending repos in GitHub.  And while a Slack bot can be built in practically any language, today we're going to build ours with Node, and not just because I <span class="EmojiInput mj40" title="Heavy Black Heart ❤"></span> Node. Anything beyond a simple notification bot depends on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets and Node go together like 🍔🍟.
+That said, the real power and fun of Slack bots comes once you know how to build your own.  In this post, we'll show you how to create and deploy a Slack bot that will respond to /slash commands in order to show the top trending repos in GitHub.  While a Slack bot can be built in practically any language, today we're going to build ours with Node, and not just because I <span class="EmojiInput mj40" title="Heavy Black Heart ❤"></span> Node. Anything beyond a simple notification bot depends on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets and Node go together like 🍔🍟.
 
-There’s a lot to cover; here's an outline of the post that might be helpful:
+We've got a lot of ground to cover, here's an outline of the journey we're about to take:
 
 1. **[Prologue](#prologue)**
 2. **[Publishing Notifications to Slack](#publish-notifications-to-slack)**
@@ -141,7 +141,7 @@ Found it? 👏 Now let's move right along.
 
 ### ![Heroku](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-heroku.png) Publish a Notification to Slack from Heroku
 
-Now that we've deployed our Starbot to Heroku, and added an incoming webhook on Slack it's time to connect the dots.
+Now that we've deployed our Starbot to Heroku and added an incoming webhook on Slack, it's time to connect the dots.
 
 First, remember the webhook URL I had you save? Let's put it to work by setting a `WEBHOOK_URL` [config  var](https://devcenter.heroku.com/articles/config-vars). This makes the value available to Starbot.
 
@@ -296,7 +296,7 @@ As you can see above, we begin by specifying our apps name, description and repo
 
 ### Adding the Heroku Button to the repo
 
-The last thing we must do before people can begin deploying Starbot with the Heroku Button, is to add it to the projects `README.md`:
+The last thing we must do before people can begin deploying Starbot with the Heroku Button, is to add it to the project's `README.md`:
 
 ```
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
