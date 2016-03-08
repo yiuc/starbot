@@ -1,33 +1,33 @@
-# Build Your Bots on Heroku, Because Bots are Apps Too
+# How to Deploy Your Slack Bots to Heroku
 
 _Traditionally, we forego excessive use of emojis on the Heroku blog. But today, we must make an exception, as we’re going to build and deploy a Slack bot to Heroku_ 🤖
 
-Slack bots come in all shapes and sizes. Whether they're publishing notifications, responding to `/slash` commands and or carrying a conversation, bots are becoming an integral part of the way we work. In this post, we'll show you how to create a bot that will respond to `/slash` commands in order to show the top trending repos in GitHub. A bot could do literally anything that's useful to you and your team as part of your day-to-day, so consider this your introduction to what's possible with a Slack bot.
+Slack bots come in all shapes and sizes. Whether they're publishing notifications, responding to `/slash` commands and or carrying a conversation, bots are becoming an integral part of the way we work with Slack. In this post, we'll show you how to create a Slack bot that will respond to `/slash` commands in order to show the top trending repos in GitHub. A bot could do literally anything that's useful to you and your team as part of your day-to-day, so consider this your introduction to what's possible with a Slack bot.
 
-For a firsthand look at what bots can do, check out the [Heroku's Button Gallery](https://elements.heroku.com/buttons), where users have created all types of bots: from fun bots like [poker](https://elements.heroku.com/buttons/charliehess/slack-poker-bot) and [Jeopardy!](https://elements.heroku.com/buttons/gesteves/trebekbot), to more practical ones like a bot that [tracks the satisfaction of your team members](https://elements.heroku.com/buttons/wearehanno/oskar) or one that [reminds your team to review existing pull requests](https://elements.heroku.com/buttons/pedrorijo91/slack-pr-bot).
+For a firsthand look at what bots can do, check out the [Heroku Button Gallery](https://elements.heroku.com/buttons), where users have created all types of bots: from fun bots like [poker](https://elements.heroku.com/buttons/charliehess/slack-poker-bot) and [Jeopardy!](https://elements.heroku.com/buttons/gesteves/trebekbot), to more practical ones like a bot that [tracks the satisfaction of your team members](https://elements.heroku.com/buttons/wearehanno/oskar) or one that [reminds your team to review existing pull requests](https://elements.heroku.com/buttons/pedrorijo91/slack-pr-bot).
 
-A Slack bot can be built in practically any language, though today we're going to build ours with Node, and not just because I ❤ Node. Anything beyond a simple notification bot depends on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets & Node go together like Netflix & Chill.
+A Slack bot can be built in practically any language, though today we're going to build ours with Node, and not just because I <span class="EmojiInput mj40" title="Heavy Black Heart ❤"></span> Node. Anything beyond a simple notification bot depends on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets and Node go together like Netflix and Chill.
 
 Regardless of which language your bots are written in, you'll need to deploy them somewhere. That's where Heroku comes in to help you build bigger, smarter bots faster. After all, bots are apps too.
 
 ## Table of Contents
 
 1. **[Prologue](#prologue)**
-2. **[Publishing Notifications to Slack](#publishing-notifications-to-slack)**
-3. **[Receiving and Responding to `/slash`]()**
-4. **[Connecting a Bot to the Slack RTM API]()**
-5. **[Share Your Bot with the Heroku Button]()**
-6. **[Epilogue]()**
+2. **[Publishing Notifications to Slack](#publish-notifications-to-slack)**
+3. **[Receiving and Responding to `/slash`](#receive-and-respond-to-code-slash-code-commands)**
+4. **[Connecting a Bot to the Slack RTM API](#publish-notifications-to-slack)**
+5. **[Share Your Bot with the Heroku Button](#connecting-a-bot-to-the-slack-rtm-api)**
+6. **[Epilogue](#epilogue)**
 
 ## Prologue
 
-Let me introduce you to [:tophat: Starbot](https://github.com/mattcreager/starbot) the example we'll be working with today and the soon-to-be easiest way to stay apprised of hip repos on GitHub, from the comfort of your favorite Slack channel.
+Let me introduce you to [:tophat: Starbot](https://github.com/mattcreager/starbot), the example we'll be working with today.  It's soon-to-be the easiest way to stay apprised of hip repos on GitHub, from the comfort of your favorite Slack channel.
 
 ### Before you begin
 
 Come build with me. Here's what you'll need:
 
-- A (free) [Heroku account](https://signup.heroku.com)
+- A (free or better) [Heroku account](https://signup.heroku.com)
 - The [Heroku Toolbelt](https://toolbelt.heroku.com)
 - A Slack team to abuse
 - Node (5.7.* preferably)
@@ -38,6 +38,8 @@ Come build with me. Here's what you'll need:
 ### :slack_icon: Create a custom Slack integration
 
 We're going to make a [custom integration bot](https://slack.com/apps/build) designed explicitly for your team, though Slack also supports Slack's [App Directory] like [Heroku's](https://slack.com/apps/A0F7VRF7E-heroku) (and either could be deployed on Heroku). As a bonus, I'll show you how to easily distribute your bot using the Heroku Button, so that you can share your creation with everyone – even grandma.
+
+(Note that if you are building a serious bot, you will ultimately want to run it on Hobby rather than Free dynos to avoid any issues with dyno sleeping and idling.  But Free dynos are great for building and testing.)
 
 First, visit [`slack.com/apps/build`](https://slack.com/apps/build) and select "Make a Custom Integration" as seen below.
 
