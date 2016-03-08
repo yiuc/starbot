@@ -2,21 +2,15 @@
 
 # How to Deploy Your Slack Bots to Heroku
 
-_Traditionally, we forego excessive use of emojis on the Heroku blog. But today, we must make an exception, as we’re going to build and deploy a Slack bot to Heroku_ 🤖
+Whether they're publishing notifications, responding to /slash commands and or carrying a conversation, bots have become an integral part of the way we work with Slack.  A bot could do literally anything that's useful to you and your team as part of your day-to-day work, as well as most anything else you can imagine. For some first-hand expereince, check out the [Heroku Button Gallery](https://elements.heroku.com/buttons), where users have created all types of bots: from fun bots like [poker](https://elements.heroku.com/buttons/charliehess/slack-poker-bot) and [Jeopardy!](https://elements.heroku.com/buttons/gesteves/trebekbot), to more practical ones like a bot that [tracks the satisfaction of your team members](https://elements.heroku.com/buttons/wearehanno/oskar) or one that [reminds your team to review existing pull requests](https://elements.heroku.com/buttons/pedrorijo91/slack-pr-bot).
 
-Slack bots come in all shapes and sizes. Whether they're publishing notifications, responding to `/slash` commands and or carrying a conversation, bots are becoming an integral part of the way we work with Slack. In this post, we'll show you how to create a Slack bot that will respond to `/slash` commands in order to show the top trending repos in GitHub. A bot could do literally anything that's useful to you and your team as part of your day-to-day, so consider this your introduction to what's possible with a Slack bot.
+That said, the real power and fun of Slack bots comes once you know how to build your own.  In this post, we'll show you how to create and deploy a Slack bot that will respond to /slash commands in order to show the top trending repos in GitHub.  And while a Slack bot can be built in practically any language, today we're going to build ours with Node, and not just because I <span class="EmojiInput mj40" title="Heavy Black Heart ❤"></span> Node. Anything beyond a simple notification bot depends on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets and Node go together like [Newfies and Skidoos](https://www.youtube.com/watch?v=Wv-tRd-6aHc).
 
-For a firsthand look at what bots can do, check out the [Heroku Button Gallery](https://elements.heroku.com/buttons), where users have created all types of bots: from fun bots like [poker](https://elements.heroku.com/buttons/charliehess/slack-poker-bot) and [Jeopardy!](https://elements.heroku.com/buttons/gesteves/trebekbot), to more practical ones like a bot that [tracks the satisfaction of your team members](https://elements.heroku.com/buttons/wearehanno/oskar) or one that [reminds your team to review existing pull requests](https://elements.heroku.com/buttons/pedrorijo91/slack-pr-bot).
-
-A Slack bot can be built in practically any language, though today we're going to build ours with Node, and not just because I <span class="EmojiInput mj40" title="Heavy Black Heart ❤"></span> Node. Anything beyond a simple notification bot depends on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets and Node go together like Netflix and Chill.
-
-Regardless of which language your bots are written in, you'll need to deploy them somewhere. That's where Heroku comes in to help you build bigger, smarter bots faster. After all, bots are apps too.
-
-## Table of Contents
+There’s a lot to cover; here's an outline of the post that might be helpful: 
 
 1. **[Prologue](#prologue)**
 2. **[Publishing Notifications to Slack](#publish-notifications-to-slack)**
-3. **[Receiving and Responding to `/slash`](#receive-and-respond-to-code-slash-code-commands)**
+3. **[Receiving and Responding to `/slash` Commands](#receive-and-respond-to-code-slash-code-commands)**
 4. **[Connecting a Bot to the Slack RTM API](#publish-notifications-to-slack)**
 5. **[Share Your Bot with the Heroku Button](#connecting-a-bot-to-the-slack-rtm-api)**
 6. **[Epilogue](#epilogue)**
