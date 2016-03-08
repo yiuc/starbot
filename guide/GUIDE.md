@@ -6,7 +6,7 @@ Whether they're publishing notifications, responding to /slash commands and or c
 
 That said, the real power and fun of Slack bots comes once you know how to build your own.  In this post, we'll show you how to create and deploy a Slack bot that will respond to /slash commands in order to show the top trending repos in GitHub.  And while a Slack bot can be built in practically any language, today we're going to build ours with Node, and not just because I <span class="EmojiInput mj40" title="Heavy Black Heart ❤"></span> Node. Anything beyond a simple notification bot depends on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets and Node go together like 🍔🍟.
 
-There’s a lot to cover; here's an outline of the post that might be helpful: 
+There’s a lot to cover; here's an outline of the post that might be helpful:
 
 1. **[Prologue](#prologue)**
 2. **[Publishing Notifications to Slack](#publish-notifications-to-slack)**
@@ -141,7 +141,18 @@ Found it? 👏 Now let's move right along.
 
 ### ![Heroku](https://heroku-www-files.s3.amazonaws.com/starbot/icons/icon-heroku.png) Publish a Notification to Slack from Heroku
 
-Now that we've deployed our Starbot to Heroku, and added an incoming webhook on Slack it's time to connect the dots. [Heroku Add-ons](https://elements.heroku.com/addons) allow us to quickly extend the functionality of our application, in this case, we're going to use the [Scheduler](https://devcenter.heroku.com/articles/scheduler) add-on to deliver trending GitHub repos to Slack daily.
+Now that we've deployed our Starbot to Heroku, and added an incoming webhook on Slack it's time to connect the dots.
+
+First, remember the webhook URL I had you save? Let's put it to work by setting a `WEBHOOK_URL` [config  var](https://devcenter.heroku.com/articles/config-vars). This makes the value available to Starbot.
+
+```
+$ heroku config:set WEBHOOK_URL=https://hooks.slack.com/services/T0..LN/B0..VV1/br..dd
+
+  Setting config vars and restarting starbot-staging... done
+  WEBHOOK_URL: https://hooks.slack.com/services/T0..LN/B0..VV1/br..dd
+```
+
+[Heroku Add-ons](https://elements.heroku.com/addons) allow us to quickly extend the functionality of our application, in this case, we're going to use the [Scheduler](https://devcenter.heroku.com/articles/scheduler) add-on to deliver trending GitHub repos to Slack daily.
 
 We can provision the add-on from the dashboard, or from the CLI with the Heroku Toolbelt.
 
