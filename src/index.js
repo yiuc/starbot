@@ -9,6 +9,8 @@ const config = require('./config')
 const commands = require('./commands')
 const helpCommand = require('./commands/help')
 
+let bot = require('./bot')
+
 let app = express()
 
 if (config('PROXY_URI')) {
@@ -22,11 +24,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => { res.send('hello world') })
 
-app.post('/hiphub', (req, res) => {
+app.post('/commands/hiphub', (req, res) => {
   let payload = req.body
 
-  if (!payload || payload.token !== config('SLASH_TOKEN')) {
-    let err = '✋  Not hip—an invalid slash token was provided.' +
+  if (!payload || payload.token !== config('HIPHUB_COMMAND_TOKEN')) {
+    let err = '✋  Not hip—an invalid slash token was provided\n' +
               '   Is your Slack slash token correctly configured?'
     console.log(err)
     res.status(401).end(err)
@@ -43,8 +45,10 @@ app.post('/hiphub', (req, res) => {
 app.listen(config('PORT'), (err) => {
   if (err) throw err
 
-  console.log(`\n🚀  HipHub LIVES on PORT ${config('PORT')} 🚀\n`)
-})
+  console.log(`\n🚀  HipHub LIVES on PORT ${config('PORT')} 🚀`)
 
-// let bot = require('./bot')
-// bot.listen({ token: config('SLACK_TEAM_TOKEN') })
+  if (config('SLACK_TOKEN')) {
+    console.log(`🤖  beep boop: HipHub bot is also online\n`)
+    bot.listen({ token: config('SLACK_TOKEN') })
+  }
+})

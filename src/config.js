@@ -8,10 +8,10 @@ if (ENV === 'development') dotenv.load()
 
 const config = {
   ENV: process.env.NODE_ENV,
-  SLACK_TEAM_TOKEN: process.env.SLACK_TEAM_TOKEN,
   PORT: process.env.PORT,
   PROXY_URI: process.env.PROXY_URI,
-  SLASH_TOKEN: 'HnnYZVorWlf5gz7ls56lxQvo'
+  HIPHUB_COMMAND_TOKEN: process.env.HIPHUB_COMMAND_TOKEN,
+  SLACK_TOKEN: process.env.SLACK_TOKEN
 }
 
 module.exports = (key) => {
