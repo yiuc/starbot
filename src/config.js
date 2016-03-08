@@ -10,8 +10,9 @@ const config = {
   ENV: process.env.NODE_ENV,
   PORT: process.env.PORT,
   PROXY_URI: process.env.PROXY_URI,
-  HIPHUB_COMMAND_TOKEN: process.env.HIPHUB_COMMAND_TOKEN,
-  SLACK_TOKEN: process.env.SLACK_TOKEN
+  STARBOT_COMMAND_TOKEN: process.env.STARBOT_COMMAND_TOKEN,
+  SLACK_TOKEN: process.env.SLACK_TOKEN,
+  ICON_EMOJI: ':stars:'
 }
 
 module.exports = (key) => {

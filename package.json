@@ -1,6 +1,6 @@
 {
-  "name": "GHBot",
-  "description": "",
+  "name": "starbot",
+  "description": "Starbot is GitHub's trending open-source page, reincarnated as a Slack bot",
   "version": "1.0.0",
   "main": "src/index.js",
   "scripts": {

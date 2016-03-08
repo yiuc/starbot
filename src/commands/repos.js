@@ -7,8 +7,8 @@ const trending = require('github-trending')
 
 const msgDefaults = {
   response_type: 'in_channel',
-  username: 'GH🌟Bot',
-  icon_url: config('ICON_URL')
+  username: 'Starbot',
+  icon_emoji: config('ICON_EMOJI')
 }
 
 const handler = (payload, res) => {

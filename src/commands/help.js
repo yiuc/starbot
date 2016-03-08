@@ -6,21 +6,21 @@ const config = require('../config')
 
 const msgDefaults = {
   response_type: 'in_channel',
-  username: 'HipHub',
-  icon_emoji: config(':tophat:')
+  username: 'Starbot',
+  icon_emoji: config('ICON_EMOJI')
 }
 
 let attachments = [
   {
-    title: 'HipHub will help you find the hippest repos on GitHub',
+    title: 'Starbot will help you find the hippest repos on GitHub',
     color: '#2FA44F',
-    text: '`/hiphub repos` returns hip repos \n`/hiphub javascript` returns hip JavaScript repos',
+    text: '`/starbot repos` returns hip repos \n`/starbot javascript` returns hip JavaScript repos',
     mrkdwn_in: ['text']
   },
   {
-    title: 'Configuring HipHub',
+    title: 'Configuring Starbot',
     color: '#E3E4E6',
-    text: '`/hiphub help` ... you\'re lookin at it! \n',
+    text: '`/starbot help` ... you\'re lookin at it! \n',
     mrkdwn_in: ['text']
   }
 ]

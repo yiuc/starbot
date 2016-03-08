@@ -1,16 +1,16 @@
-# Hip:tophat:Hub
+# 🌟 Starbot
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-HipHub is [GitHub's trending open-source](https://github.com/trending/) page, reincarnated as a Slack bot. It is also the sample referenced in the ["Slack on Heroku"]() blog post.
+Starbot is [GitHub's trending open-source](https://github.com/trending/) page, reincarnated as a Slack bot. It is also the sample referenced in the ["Slack on Heroku"]() blog post.
 
 
 ### Supported `/slash` commands
 
-Create a `/hiphub` [custom slash command](https://api.slack.com/slash-commands), using the URL: `{app-name}.herokuapp.com/commands/hiphub`. *Take note of the provided `token`, this is used to verify requests come from Slack.*
+Create a `/starbot` [custom slash command](https://api.slack.com/slash-commands), using the URL: `{app-name}.herokuapp.com/commands/starbot`. *Take note of the provided `token`, this is used to verify requests come from Slack.*
 
-- `/hiphub` or `/hiphub help` - List available commands
-- `/hiphub repos` - Display trending GitHub projects
+- `/starbot` or `/starbot help` - List available commands
+- `/starbot repos` - Display trending GitHub projects
 
 ### Install
 
@@ -36,7 +36,7 @@ PORT=3000
 ```shell
 $ npm start
 
-🚀 HipHub LIVES on PORT 3000 🚀
+🚀 Starbot LIVES on PORT 3000 🚀
 ```
 
 Visit [localhost:3000](http://localhost:3000).
