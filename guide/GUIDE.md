@@ -4,6 +4,8 @@ _Traditionally, we forego the excessive use of emojis on the Heroku blog. But to
 
 Slack bots come in many shapes and sizes, they publish notifications, respond to `/slash` commands and some, the very best, can even carry a conversation. Bots are becoming an integral part of the way we and developers generally work and get information from the comfort of our slack rooms. In this post we'll create a bot to respond to `/slash` commands for showing us trending repos in GitHub, but a bot could be literally anything that's useful to you and your team as part of your day-to-day.
 
+For a firsthand look at what bots can do, check out the [Heroku's Button Gallery](https://elements.heroku.com/buttons), where users have created all types of bots from fun bots like [poker bots](https://elements.heroku.com/buttons/charliehess/slack-poker-bot) and [Jeopardy! bots](https://elements.heroku.com/buttons/gesteves/trebekbot), to more practical bots like a bot that [tracks the satisfaction of your team members](https://elements.heroku.com/buttons/wearehanno/oskar) or one that [reminds your team to review existing pull requests.](https://elements.heroku.com/buttons/pedrorijo91/slack-pr-bot)
+
 A Slack bot can be built in practically any language, but we're going to build ours with Node, and not just because I ❤ Node—Smart bots (the chatty sort) depend on Slack's WebSocket-based [RTM (Real Time Messaging) API](https://api.slack.com/rtm), and WebSockets & Node go together like Netflix & Chill.
 
 Regardless of which language your bots are written in, Heroku is going to help you build bigger, smarter bots faster, because bots are apps too.
