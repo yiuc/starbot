@@ -24,9 +24,17 @@ const handler = (payload, res) => {
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
 
+    let attachments = [
+      {
+        title: `starbot9gag`,
+        text: `${body}`,
+        mrkdwn_in: ['text']
+      }
+    ]
+
     let msg = _.defaults({
       channel: payload.channel_name,
-      attachments: body
+      attachments: attachments
     }, msgDefaults)
 
     res.set('content-type', 'application/json')
